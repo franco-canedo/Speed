@@ -61,19 +61,37 @@
 
 .game {
   border: dotted;
-  height: 100%;
+  height: 100vh;
 }
 
 .gameSpace {
   border: solid;
   background: white;
-  height: auto;
+  /* height: auto; */
+  
   column-count: 10;
 }
 
 .box {
   background: whitesmoke;
-  box-shadow: 10px 10px;
-  padding: 10px 15px;
+  margin-bottom: 10px;
+  box-shadow: 5px 5px;
+  text-align: center;
+  /* padding: 5px; */
   border-bottom: outset;
+  border-right: outset;
+  
 }
+
+@media only screen and (max-height: 700px) {
+  .box {
+    height: 60px;
+  }
+}
+
+@media only screen and (max-height: 500px) {
+  .box {
+    height: 30px;
+  }
+}
+
