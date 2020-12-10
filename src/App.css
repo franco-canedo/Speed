@@ -36,3 +36,44 @@
     transform: rotate(360deg);
   }
 }
+
+.title {
+  color: blue;
+  text-align: center;
+  margin-top: 25%;
+}
+
+.main {
+  border: dotted;
+  height: 100%;
+}
+
+.playButton {
+  text-align: center;
+  margin-bottom: 25%;
+  margin-left: 50%;
+}
+
+.gameTitle {
+  color: black;
+  text-align: center;
+}
+
+.game {
+  border: dotted;
+  height: 100%;
+}
+
+.gameSpace {
+  border: solid;
+  background: white;
+  height: auto;
+  column-count: 10;
+}
+
+.box {
+  background: whitesmoke;
+  box-shadow: 10px 10px;
+  padding: 10px 15px;
+  border-bottom: outset;
+}
