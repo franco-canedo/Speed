@@ -12,7 +12,7 @@ function App() {
   const [game, setState] = useState(false);
 
   const playGame = () => {
-    setState(true)
+    setState(true);
   }
 
 

@@ -68,19 +68,62 @@
   border: solid;
   background: white;
   /* height: auto; */
-  
+  padding: 10px;
   column-count: 10;
 }
 
 .box {
   background: whitesmoke;
   margin-bottom: 10px;
-  box-shadow: 5px 5px;
+  box-shadow: 5px 5px #525249;
   text-align: center;
-  /* padding: 5px; */
+ border-radius: 10%;
   border-bottom: outset;
   border-right: outset;
   
+}
+
+.boxClicked {
+  background: whitesmoke;
+  margin-bottom: 10px;
+  box-shadow: 5px 5px #525249;
+  text-align: center;
+  border-radius: 10%;
+  border-bottom: outset;
+  border-right: outset;
+  transform: translateY(0);
+  box-shadow:
+    inset 0 0 30px whitesmoke,
+    inset 10px 0 20px #f0f,
+    inset -10px 0 20px#e30ed5,
+    inset 10px 0 100px #f0f,
+    inset -10px 0 100px #e30ed5,
+    0 0 20px #990000,
+    -10px 0 20px #f0f,
+    10px 0 20px#e30ed5;
+}
+
+.boxInterval {
+  background: whitesmoke;
+  margin-bottom: 10px;
+  box-shadow: 5px 5px #bb52c9;
+  text-align: center;
+  border-radius: 10%;
+  border-bottom: outset;
+  border-right: outset;
+}
+
+.box:hover  {
+  transform: translateY(0);
+  box-shadow:
+    inset 0 0 60px whitesmoke,
+    inset 20px 0 80px#f2d3f0,
+    inset -20px 0 80px #0ff,
+    inset 20px 0 300px #f2d3f0,
+    inset -20px 0 300px #0ff,
+    0 0 10px #990000,
+    -10px 0 10px #f0f,
+    10px 0 10px #0ff;
 }
 
 @media only screen and (max-height: 700px) {
@@ -94,4 +137,7 @@
     height: 30px;
   }
 }
+
+/* //////////////// */
+
 
