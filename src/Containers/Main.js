@@ -6,7 +6,10 @@ const Main = (props) =>  {
     return (
         <div className='main'>
             <h1 className="title">Test your mind</h1>
-            <button className='playButton' onClick={props.playGame}>Play!</button>
+            <div className='playButton'>
+            <button className='btn btn-dark btn-lg' onClick={props.playGame}>Play!</button>
+            </div>
+            
         </div>
         
     )

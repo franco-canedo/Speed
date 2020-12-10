@@ -38,44 +38,40 @@
 }
 
 .title {
-  color: blue;
+  color: rgb(53, 53, 53);
   text-align: center;
   margin-top: 25%;
+  margin-bottom: 50px;;
 }
 
 .main {
-  border: dotted;
+  border: groove;
   height: 100%;
+  background: linear-gradient(to right, #39609e, #5876a6, #808c9e);
 }
 
 .playButton {
+  animation: Slide_Up 2s ease;
   text-align: center;
   margin-bottom: 25%;
-  margin-left: 50%;
 }
 
-.gameTitle {
-  color: black;
-  text-align: center;
-}
 
-.game {
-  border: dotted;
-  height: 100vh;
-}
-
-.gameSpace {
-  border: solid;
-  background: white;
-  /* height: auto; */
-  padding: 10px;
-  column-count: 10;
+@keyframes Slide_Up {
+  0%{
+    transform: translateY(500px);
+  }
+  100%{
+    transform: translatey(0);
+  }
 }
 
 .box {
+  
+ 
   background: whitesmoke;
   margin-bottom: 10px;
-  box-shadow: 5px 5px #525249;
+  box-shadow: 5px 5px #20f1e0;
   text-align: center;
  border-radius: 10%;
   border-bottom: outset;
@@ -136,6 +132,39 @@
   .box {
     height: 30px;
   }
+}
+
+.gameheader {
+  column-count: 3;
+  background-color: wheat;
+}
+
+.headerDivs {
+  box-shadow: 0 6px 4px -2px rgb(124, 131, 127);
+  width: 30%;
+  background-color: rgb(190, 201, 192);
+  padding-left: 30px;
+  
+}
+
+.game {
+  /* border: dotted; */
+  height: 100vh;
+  background: linear-gradient(to right, #39609e, #5876a6, #808c9e);
+
+}
+
+.gameSpace {
+  background: linear-gradient(to right, #39609e, #5876a6, #808c9e);
+  /* height: auto; */
+  padding: 10px;
+  column-count: 10;
+  background-color: whitesmoke;
+  animation: Slide_Up 1.4s ease;
+}
+
+h1 {
+  font-family: "Times New Roman", Times, serif;
 }
 
 /* //////////////// */

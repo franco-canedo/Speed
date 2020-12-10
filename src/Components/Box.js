@@ -17,7 +17,7 @@ const Box = (props) => {
             setClassName('box');
         }
         
-        setClicked(prevState => !prevState)
+        setClicked(prevState => !prevState.clicked)
     }
 
     // const interval = () => {
