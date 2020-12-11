@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 
 import Box from '../Components/Box';
 import Timer from '../Components/Timer';
+import RestartModal from '../Components/RestartModal';
+
 
 
 
@@ -19,9 +21,9 @@ const Game = () => {
     const [number, setAnswer] = useState('');
     const [numberColor, setNumberColor] = useState('');
     const [colorName, setColorName] = useState('');
-    const [time, setTime] = useState(5);
     const [createdBoxes, setCreatedBoxes] = useState([]);
-    const [isRunning, setIsRunning] = useState(true);
+    const [hasLost, setHasLost] = useState(false);
+    
 
     useEffect(() => {
         let i = Math.floor(Math.random() * colors.length);
@@ -51,7 +53,7 @@ const Game = () => {
 
     const createBoxes = (boxes) => {
         let i = 0;
-        let color = ''
+        let color = '';
         console.log(i);
         shuffle(boxes);
         return boxes.map(number => {
@@ -103,6 +105,11 @@ const Game = () => {
         })
     }
 
+    const restart = () => {
+        setHasLost(true);
+        console.log('restart?')
+    }
+
 
     return (
         <div className='game'>
@@ -111,7 +118,7 @@ const Game = () => {
                     <h1>Find all the {colorName} {number}'s!</h1>
                 </div>
                 <div className='headerDivs'>
-                    <Timer/>
+                    <Timer restart={restart}/>
                 </div>
                 <div className='headerDivs'>
                     <h1>Score: </h1>
@@ -122,6 +129,10 @@ const Game = () => {
             <div className='gameSpace'>
                 {arrayLoop(boxes)}
             </div>
+            {
+                hasLost ?  <RestartModal hasLost={hasLost}/> : null
+            }
+           
         </div>
 
     )

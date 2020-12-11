@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 
-const Timer = () => {
+const Timer = (props) => {
 
     const [timeLeft, setTimeLeft] = useState(5);
 
     useEffect(() => {
-        if(!timeLeft) return;
+        if(!timeLeft) {
+            props.restart();
+            return;
+        }
         const timer = setInterval(() => {
                 setTimeLeft(timeLeft => timeLeft - 1)   
         }, 1000)
@@ -13,6 +16,7 @@ const Timer = () => {
         // returned function will be called on component unmount 
         return () => {
             clearInterval(timer);
+            
         }
     }, [timeLeft])
 
