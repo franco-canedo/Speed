@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
 import Box from '../Components/Box';
+import Timer from '../Components/Timer';
+
 
 
 
@@ -13,22 +15,39 @@ const Game = () => {
         '#59d467',
         '#bfb64b',
     ]);
-    const [number, setAnswer] = useState('8');
-    const [numberColor, setNumberColor] = useState('green');
-    const [time, setTime] = useState(10)
+
+    const [number, setAnswer] = useState('');
+    const [numberColor, setNumberColor] = useState('');
+    const [colorName, setColorName] = useState('');
+    const [time, setTime] = useState(5);
+    const [createdBoxes, setCreatedBoxes] = useState([]);
+    const [isRunning, setIsRunning] = useState(true);
 
     useEffect(() => {
-        const timer = setInterval(() => {
-            setTime(prevState => {
-                return prevState.time - 1
-            })
-        }, 1000)
-
-        // returned function will be called on component unmount 
-        return () => {
-            clearInterval(timer);
+        let i = Math.floor(Math.random() * colors.length);
+        setAnswer(boxes[Math.floor(Math.random() * boxes.length)]);
+        setNumberColor(colors[i]);
+        let color = '';
+        switch (i) {
+            case 0:
+                color = 'blue'
+                break;
+            case 1:
+                color = 'red'
+                break;
+            case 2:
+                color = 'green'
+                break;
+            case 3:
+                color = 'yellow'
+                break;
         }
+        setColorName(color);
     }, [])
+
+    const checkAnswer = (number, color) => {
+        console.log(number, color);
+    }
 
     const createBoxes = (boxes) => {
         let i = 0;
@@ -51,9 +70,11 @@ const Game = () => {
                     color = 'yellow'
                     break;
             }
-            return <Box number={number} color={colors[i]} colorString={color} />
+            return <Box number={number} color={colors[i]} colorString={color} checkAnswer={checkAnswer} />
         })
     }
+
+    
 
     const shuffle = (boxes) => {
         let m = boxes.length, t, i;
@@ -87,10 +108,10 @@ const Game = () => {
         <div className='game'>
             <div className='gameHeader'>
                 <div className='headerDivs'>
-                    <h1>Find all the {numberColor} {number}'s!</h1>
+                    <h1>Find all the {colorName} {number}'s!</h1>
                 </div>
                 <div className='headerDivs'>
-                    <h1>Time left: {time.toString()}</h1>
+                    <Timer/>
                 </div>
                 <div className='headerDivs'>
                     <h1>Score: </h1>
@@ -99,9 +120,6 @@ const Game = () => {
 
 
             <div className='gameSpace'>
-
-
-
                 {arrayLoop(boxes)}
             </div>
         </div>

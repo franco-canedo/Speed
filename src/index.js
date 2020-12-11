@@ -4,18 +4,12 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-import { BrowserRouter as Router, Route } from "react-router-dom";
+// import { BrowserRouter as Router, Route } from "react-router-dom";
 import Game from './Containers/Game';
 
 ReactDOM.render(
   <React.StrictMode>
     <App />
-    <Router>
-      <React.Fragment>
-        <Route exact path='/' component={App} />
-        <Route exact path='/game' component={Game} />
-      </React.Fragment>
-    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );

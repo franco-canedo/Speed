@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
+import { useUID, useUIDSeed } from 'react-uid';
 
 const Box = (props) => {
 
     const [className, setClassName] = useState('box');
     const [clicked, setClicked] = useState(false);
     const [color, setColor] = useState(props.color);
+    const [number, setNumber] = useState(props.number);
+    const uid = useUID();  
 
-    useEffect(() => {
-        clearInterval();
-    })
 
     const clickCard = () => {
         if (className == 'box') {
@@ -35,11 +35,15 @@ const Box = (props) => {
     return (
         
         <div 
+        id={uid}
         className={className} 
-        style={{ backgroundColor: props.color }} 
-        onClick={clickCard}>
+        style={{ backgroundColor: color }} 
+        onClick={() => {
+            clickCard();
+            props.checkAnswer(number, color);
+            }}>
             <div className='face'>
-                <h1>{props.number}</h1>
+                <h1>{number}</h1>
             </div>
             
         </div>
