@@ -7,7 +7,7 @@ const RestartModal = (props) => {
   
     const handleClose = () => {
         setShow(false);
-        window.location.reload(true);
+        // window.location.reload(true);
     };
     const handleShow = () => setShow(true);
 

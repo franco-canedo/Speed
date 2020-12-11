@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useUID, useUIDSeed } from 'react-uid';
 
+import { useSelector, useDispatch, connect } from 'react-redux';
+import addInventory from '../actions';
+
 const Box = (props) => {
 
     const [className, setClassName] = useState('box');
@@ -9,6 +12,17 @@ const Box = (props) => {
     const [number, setNumber] = useState(props.number);
     const uid = useUID();  
 
+    const toggle = useSelector((state) => state.toggle);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        const boxObject = {
+            id: uid,
+            color: props.color,
+            number: props.number
+        }
+        dispatch(addInventory(boxObject));
+    }, []);
 
     const clickCard = () => {
         if (className == 'box') {
@@ -19,18 +33,6 @@ const Box = (props) => {
         
         setClicked(prevState => !prevState.clicked)
     }
-
-    // const interval = () => {
-    //    let flash =  setInterval(() => {
-    //         if (className == 'box') {
-    //             setClassName('boxInterval')
-    //         } else if (className = 'boxInterval') {
-    //             setClassName('box')
-    //         } else {
-    //             clearInterval(flash)
-    //         }
-    //     },1000)
-    // }
 
     return (
         
