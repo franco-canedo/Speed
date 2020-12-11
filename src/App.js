@@ -1,36 +1,29 @@
 import logo from './logo.svg';
 import './App.css';
-import React, {useState} from 'react';
+import React, { useState } from 'react';
+import Main from './Containers/Main';
+import Game from './Containers/Game';
 
-function onlyOnce() {
-  console.log('run once');
-  return 4;
-}
+
+
 
 function App() {
 
-  const [state, setState] = useState({count: 4, theme: 'blue'});
-  const count = state.count
-  const theme = state.theme
+  const [game, setState] = useState(false);
 
-  function decrementCount() {
-    setState(prevState => {
-      return {...prevState, count: prevState.count - 1}
-    })
+  const playGame = () => {
+    setState(true);
   }
 
-  const incrementCount = () => {
-    setState(prevState => {
-      return {...prevState, count: prevState.count + 1}
-    })
-  }
+
 
   return (
     <React.Fragment>
-      <button onClick={decrementCount}>-</button>
-  <span>{count}</span>
-  <span>{theme}</span>
-      <button onClick={incrementCount}>+</button>
+
+      {
+        game ? <Game/> : <Main playGame={playGame}/>
+      }
+
     </React.Fragment>
   )
 }
