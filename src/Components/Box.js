@@ -2,20 +2,23 @@ import React, { useEffect, useState } from 'react';
 import { useUID, useUIDSeed } from 'react-uid';
 
 import { useSelector, useDispatch, connect } from 'react-redux';
-import addInventory from '../actions';
+import { addInventory } from '../actions';
+import { addAnswer } from '../actions';
 
 const Box = (props) => {
 
     const [className, setClassName] = useState('box');
     const [clicked, setClicked] = useState(false);
-    const [color, setColor] = useState(props.color);
-    const [number, setNumber] = useState(props.number);
+    const [color, setColor] = useState('');
+    const [number, setNumber] = useState(0);
     const uid = useUID();  
 
     const toggle = useSelector((state) => state.toggle);
     const dispatch = useDispatch();
 
     useEffect(() => {
+        setColor(props.color);
+        setNumber(props.number);
         const boxObject = {
             id: uid,
             color: props.color,

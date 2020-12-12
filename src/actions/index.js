@@ -2,9 +2,17 @@ export const toggle = () => ({
     type: 'TOGGLE'
 });
 
-const addInventory = (boxObject) => ({
+export const addInventory = (boxObject) => ({
     type: 'ADD',
     payload: boxObject,
 })
 
-export default addInventory;
+export const addAnswer = (boxObject) => ({
+    type: 'ADD_ANSWER',
+    payload: boxObject
+})
+
+// export default {
+//     addInventory,
+//     addAnswer,
+// }
