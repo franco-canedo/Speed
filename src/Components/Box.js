@@ -4,6 +4,7 @@ import { useUID, useUIDSeed } from 'react-uid';
 import { useSelector, useDispatch, connect } from 'react-redux';
 import { addInventory } from '../actions';
 import { addAnswer } from '../actions';
+import { selectAnswer } from '../actions';
 
 const Box = (props) => {
 
@@ -13,7 +14,7 @@ const Box = (props) => {
     const [number, setNumber] = useState(0);
     const uid = useUID();  
 
-    const toggle = useSelector((state) => state.toggle);
+    const answerObject = useSelector((state) => state.rightAnswer);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -33,7 +34,11 @@ const Box = (props) => {
         } else {
             setClassName('box');
         }
-        
+        let b = false;
+        if(number == answerObject.number && color == answerObject.color) {
+            b = true;
+        }
+        dispatch(selectAnswer(b));
         setClicked(prevState => !prevState.clicked)
     }
 

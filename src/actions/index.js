@@ -12,6 +12,17 @@ export const addAnswer = (boxObject) => ({
     payload: boxObject
 })
 
+export const answer = (answerObject) => ({
+    type: 'ANSWER',
+    payload: answerObject
+})
+
+export const selectAnswer = (b) => ({
+    type: 'SELECT_ANSWER',
+    payload: b
+})
+    
+
 // export default {
 //     addInventory,
 //     addAnswer,

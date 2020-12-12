@@ -5,6 +5,7 @@ import Timer from '../Components/Timer';
 import RestartModal from '../Components/RestartModal';
 import { useSelector, useDispatch } from 'react-redux';
 import { addAnswer } from '../actions';
+import { answer } from '../actions'
 
 import { connect } from 'react-redux';
 
@@ -33,7 +34,8 @@ const Game = () => {
 
     useEffect(() => {
         let i = Math.floor(Math.random() * colors.length);
-        setAnswer(boxes[Math.floor(Math.random() * boxes.length)]);
+        let n = boxes[Math.floor(Math.random() * boxes.length)]
+        setAnswer(n);
         setNumberColor(colors[i]);
         let color = '';
         switch (i) {
@@ -50,6 +52,11 @@ const Game = () => {
                 color = 'yellow'
                 break;
         }
+        let answerObject = {
+            number: n,
+            color: colors[i],
+        }
+        dispatch(answer(answerObject));
         setColorName(color);
     }, [])
 
@@ -59,7 +66,8 @@ const Game = () => {
         if (number == numberAnswer && color == numberColorAnswer) {
             console.log('correct');
         } else {
-            restart();
+            // restart();
+            console.log('wrong answer');
         }
     }
 
