@@ -30,9 +30,12 @@ const Game = () => {
     const [hasLost, setHasLost] = useState(false);
 
     const dispatch = useDispatch();
+    const answerObject = useSelector((state) => state.rightAnswer);
+    const inventory = useSelector((state) => state.inventory);
 
 
     useEffect(() => {
+        
         let i = Math.floor(Math.random() * colors.length);
         let n = boxes[Math.floor(Math.random() * boxes.length)]
         setAnswer(n);
@@ -56,6 +59,7 @@ const Game = () => {
             number: n,
             color: colors[i],
         }
+        // right answer into redux
         dispatch(answer(answerObject));
         setColorName(color);
     }, [])
@@ -95,7 +99,7 @@ const Game = () => {
                     break;
             }
             
-            console.log(number, numberAnswer);
+            // console.log(number, numberAnswer);
             const boxObject = {
                 color: colors[i],
                 number: number
@@ -143,7 +147,7 @@ const Game = () => {
         })
     }
 
-    // refresh the page if player loses
+    // Logic to see if player lost. 
     const restart = () => {
         setHasLost(true);
         console.log('restart?')

@@ -23,7 +23,8 @@ const Box = (props) => {
         const boxObject = {
             id: uid,
             color: props.color,
-            number: props.number
+            number: props.number,
+            clicked: false
         }
         dispatch(addInventory(boxObject));
     }, []);
@@ -34,11 +35,14 @@ const Box = (props) => {
         } else {
             setClassName('box');
         }
-        let b = false;
-        if(number == answerObject.number && color == answerObject.color) {
-            b = true;
+       
+        // check if answer is right, into redux
+        const data = {
+            uid: uid,
+            number: number,
         }
-        dispatch(selectAnswer(b));
+        console.log(data)
+        dispatch(selectAnswer(data));
         setClicked(prevState => !prevState.clicked)
     }
 

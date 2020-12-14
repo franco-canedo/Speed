@@ -1,3 +1,5 @@
+import { UIDConsumer } from "react-uid";
+
 export const toggle = () => ({
     type: 'TOGGLE'
 });
@@ -17,9 +19,9 @@ export const answer = (answerObject) => ({
     payload: answerObject
 })
 
-export const selectAnswer = (b) => ({
+export const selectAnswer = (data) => ({
     type: 'SELECT_ANSWER',
-    payload: b
+    payload: data
 })
     
 
