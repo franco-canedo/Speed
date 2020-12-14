@@ -181,12 +181,5 @@ const Game = () => {
     )
 }
 
-// const mapDispatchToProps = dispatch => {
-//     return {
-//         answer: (boxObject) => dispatch(addAnswer(boxObject))
-//     }
-// }
-
-// export default connect(null, mapDispatchToProps)(Game);
 export default Game;
 

@@ -23,6 +23,11 @@ export const selectAnswer = (data) => ({
     type: 'SELECT_ANSWER',
     payload: data
 })
+
+export const deselectAnswer = (data) => ({
+    type: 'DESELECT_ANSWER',
+    payload: data
+})
     
 
 // export default {
