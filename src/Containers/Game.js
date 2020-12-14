@@ -3,7 +3,11 @@ import React, { useEffect, useState } from 'react';
 import Box from '../Components/Box';
 import Timer from '../Components/Timer';
 import RestartModal from '../Components/RestartModal';
+import { useSelector, useDispatch } from 'react-redux';
+import { addAnswer } from '../actions';
+import { answer } from '../actions'
 
+import { connect } from 'react-redux';
 
 
 
@@ -12,22 +16,26 @@ const Game = () => {
 
     const [boxes, setState] = useState(['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']);
     const [colors, setColor] = useState([
-        '#4753fc',
-        '#fc3549',
-        '#59d467',
-        '#bfb64b',
+        '#4753fc', //blue
+        '#fc3549', //red
+        '#59d467', //green
+        '#bfb64b', //yellow
     ]);
 
-    const [number, setAnswer] = useState('');
-    const [numberColor, setNumberColor] = useState('');
+    // answer
+    const [numberAnswer, setAnswer] = useState('');
+    // color of answer
+    const [numberColorAnswer, setNumberColor] = useState('');
     const [colorName, setColorName] = useState('');
-    const [createdBoxes, setCreatedBoxes] = useState([]);
     const [hasLost, setHasLost] = useState(false);
-    
+
+    const dispatch = useDispatch();
+
 
     useEffect(() => {
         let i = Math.floor(Math.random() * colors.length);
-        setAnswer(boxes[Math.floor(Math.random() * boxes.length)]);
+        let n = boxes[Math.floor(Math.random() * boxes.length)]
+        setAnswer(n);
         setNumberColor(colors[i]);
         let color = '';
         switch (i) {
@@ -44,19 +52,33 @@ const Game = () => {
                 color = 'yellow'
                 break;
         }
+        let answerObject = {
+            number: n,
+            color: colors[i],
+        }
+        dispatch(answer(answerObject));
         setColorName(color);
     }, [])
 
+    // check if answers selected are correct
     const checkAnswer = (number, color) => {
         console.log(number, color);
+        if (number == numberAnswer && color == numberColorAnswer) {
+            console.log('correct');
+        } else {
+            // restart();
+            console.log('wrong answer');
+        }
     }
 
+    // create box components
     const createBoxes = (boxes) => {
         let i = 0;
         let color = '';
         console.log(i);
         shuffle(boxes);
         return boxes.map(number => {
+           
             i = Math.floor(Math.random() * colors.length);
             switch (i) {
                 case 0:
@@ -72,12 +94,27 @@ const Game = () => {
                     color = 'yellow'
                     break;
             }
-            return <Box number={number} color={colors[i]} colorString={color} checkAnswer={checkAnswer} />
+            
+            console.log(number, numberAnswer);
+            const boxObject = {
+                color: colors[i],
+                number: number
+            }
+
+            if(number == numberAnswer && colors[i] == numberColorAnswer) {
+                dispatch(addAnswer(boxObject))
+            }
+
+            return <Box
+                number={number}
+                color={colors[i]}
+                colorString={color}
+                checkAnswer={checkAnswer} />
         })
     }
 
-    
 
+    // shuffle array of numbers
     const shuffle = (boxes) => {
         let m = boxes.length, t, i;
         while (m) {
@@ -90,6 +127,7 @@ const Game = () => {
         return boxes;
     }
 
+    // Create 7 rows of boxes
     const arrayLoop = (boxes) => {
         let i = 0;
         return boxes.map(number => {
@@ -105,6 +143,7 @@ const Game = () => {
         })
     }
 
+    // refresh the page if player loses
     const restart = () => {
         setHasLost(true);
         console.log('restart?')
@@ -115,10 +154,10 @@ const Game = () => {
         <div className='game'>
             <div className='gameHeader'>
                 <div className='headerDivs'>
-                    <h1>Find all the {colorName} {number}'s!</h1>
+                    <h1>Find all the {colorName} {numberAnswer}'s!</h1>
                 </div>
                 <div className='headerDivs'>
-                    <Timer restart={restart}/>
+                    <Timer restart={restart} />
                 </div>
                 <div className='headerDivs'>
                     <h1>Score: </h1>
@@ -130,12 +169,20 @@ const Game = () => {
                 {arrayLoop(boxes)}
             </div>
             {
-                hasLost ?  <RestartModal hasLost={hasLost}/> : null
+                hasLost ? <RestartModal hasLost={hasLost} /> : null
             }
-           
+
         </div>
 
     )
 }
 
+// const mapDispatchToProps = dispatch => {
+//     return {
+//         answer: (boxObject) => dispatch(addAnswer(boxObject))
+//     }
+// }
+
+// export default connect(null, mapDispatchToProps)(Game);
 export default Game;
+

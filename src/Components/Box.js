@@ -1,14 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import { useUID, useUIDSeed } from 'react-uid';
 
+import { useSelector, useDispatch, connect } from 'react-redux';
+import { addInventory } from '../actions';
+import { addAnswer } from '../actions';
+import { selectAnswer } from '../actions';
+
 const Box = (props) => {
 
     const [className, setClassName] = useState('box');
     const [clicked, setClicked] = useState(false);
-    const [color, setColor] = useState(props.color);
-    const [number, setNumber] = useState(props.number);
+    const [color, setColor] = useState('');
+    const [number, setNumber] = useState(0);
     const uid = useUID();  
 
+    const answerObject = useSelector((state) => state.rightAnswer);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        setColor(props.color);
+        setNumber(props.number);
+        const boxObject = {
+            id: uid,
+            color: props.color,
+            number: props.number
+        }
+        dispatch(addInventory(boxObject));
+    }, []);
 
     const clickCard = () => {
         if (className == 'box') {
@@ -16,21 +34,13 @@ const Box = (props) => {
         } else {
             setClassName('box');
         }
-        
+        let b = false;
+        if(number == answerObject.number && color == answerObject.color) {
+            b = true;
+        }
+        dispatch(selectAnswer(b));
         setClicked(prevState => !prevState.clicked)
     }
-
-    // const interval = () => {
-    //    let flash =  setInterval(() => {
-    //         if (className == 'box') {
-    //             setClassName('boxInterval')
-    //         } else if (className = 'boxInterval') {
-    //             setClassName('box')
-    //         } else {
-    //             clearInterval(flash)
-    //         }
-    //     },1000)
-    // }
 
     return (
         
