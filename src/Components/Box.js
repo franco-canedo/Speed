@@ -26,7 +26,7 @@ const Box = (props) => {
             id: uid,
             color: props.color,
             number: props.number,
-            clicked: false
+            clicked: false,
         }
         dispatch(addInventory(boxObject));
     }, []);
@@ -45,7 +45,7 @@ const Box = (props) => {
         }
         console.log(data)
         let selected_box = inventory[number].find(box => {
-            return box.id == uid;
+            return box.id === uid;
         });
         if (selected_box.clicked) {
             dispatch(deselectAnswer(data))

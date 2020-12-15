@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Box from '../Components/Box';
 import Timer from '../Components/Timer';
 import RestartModal from '../Components/RestartModal';
+import ContinueModal from '../Components/ContinueModal';
 import { useSelector, useDispatch } from 'react-redux';
 import { addAnswer } from '../actions';
 import { answer } from '../actions'
@@ -28,6 +29,7 @@ const Game = () => {
     const [numberColorAnswer, setNumberColor] = useState('');
     const [colorName, setColorName] = useState('');
     const [hasLost, setHasLost] = useState(false);
+    const [hasWon, setHasWon] = useState(true);
 
     const dispatch = useDispatch();
     const answerObject = useSelector((state) => state.rightAnswer);
@@ -67,7 +69,7 @@ const Game = () => {
     // check if answers selected are correct
     const checkAnswer = (number, color) => {
         console.log(number, color);
-        if (number == numberAnswer && color == numberColorAnswer) {
+        if (number === numberAnswer && color === numberColorAnswer) {
             console.log('correct');
         } else {
             // restart();
@@ -105,7 +107,7 @@ const Game = () => {
                 number: number
             }
 
-            if(number == numberAnswer && colors[i] == numberColorAnswer) {
+            if(number === numberAnswer && colors[i] === numberColorAnswer) {
                 dispatch(addAnswer(boxObject))
             }
 
@@ -149,8 +151,24 @@ const Game = () => {
 
     // Logic to see if player lost. 
     const restart = () => {
-        setHasLost(true);
-        console.log('restart?')
+        setHasLost(check_if_win());
+        setHasWon(check_if_win());
+        console.log('restart?');
+    }
+
+    const check_if_win = () => {
+        let selected_boxes_array = [];
+        for(const num in inventory) {
+            const filtered = inventory[num].filter(box => {
+                return box.clicked === true;
+            });
+            selected_boxes_array = selected_boxes_array.concat(filtered);
+        }
+        console.log(selected_boxes_array);
+        const check_array = selected_boxes_array.filter(box => {
+            return box.number !== numberAnswer || box.color !== numberColorAnswer;
+        });
+        return check_array.length > 0 ? true : false;
     }
 
 
@@ -174,6 +192,9 @@ const Game = () => {
             </div>
             {
                 hasLost ? <RestartModal hasLost={hasLost} /> : null
+            }
+            {
+                hasWon ?  null : <ContinueModal hasWon={hasWon} />
             }
 
         </div>
