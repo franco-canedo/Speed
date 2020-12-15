@@ -67,7 +67,7 @@ const Box = (props) => {
             props.checkAnswer(number, color);
             }}>
             <div className='face'>
-                <h1>{number}</h1>
+                <p className='numbers'>{number}</p>
             </div>
             
         </div>

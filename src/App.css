@@ -51,6 +51,12 @@
   background: linear-gradient(to right, #39609e, #5876a6, #808c9e);
 }
 
+@media only screen and (max-width: 600px) {
+  .main {
+    height: 650px;
+  }
+}
+
 .playButton {
   animation: Slide_Up 2s ease;
   text-align: center;
@@ -123,8 +129,22 @@
     10px 0 10px #0ff;
 }
 
+@media only screen and (max-width: 600px) {
+  .box {
+    height: 30px;
+  }
+
+  .boxClicked {
+    height: 30px;
+  }
+}
+
 @media only screen and (max-height: 700px) {
   .box {
+    height: 60px;
+  }
+
+  .boxClicked {
     height: 60px;
   }
 }
@@ -132,6 +152,10 @@
 @media only screen and (max-height: 500px) {
   .box {
     height: 30px;
+  }
+
+  .boxClicked {
+    height: 60px;
   }
 }
 
@@ -157,6 +181,25 @@
   padding-left: 30px;
   
 }
+
+@media only screen and (max-width: 600px) {
+  .headerDivs {
+    width: 80%;
+  }
+}
+
+.numbers {
+  font-size: 27px;
+  font-family: "Times New Roman", Times, serif;
+}
+
+@media only screen and (max-width: 600px) {
+  .numbers {
+    font-size: 20px;
+  }
+}
+
+
 
 .game {
   /* border: dotted; */
