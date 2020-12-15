@@ -1,11 +1,12 @@
-const selectAnswer = (state = [], action) => { 
-    switch(action.type) {
-      case 'SELECT_ANSWER':
-        const array = [...state, action.payload]
-        return array;
-      default: 
-        return state;
-  }
+import { indexOf } from "underscore";
+
+const selectAnswer = (state = [], action) => {
+    switch (action.type) {
+
+
+        default:
+            return state;
+    }
 }
 
 export default selectAnswer;
