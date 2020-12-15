@@ -157,18 +157,33 @@ const Game = () => {
     }
 
     const check_if_win = () => {
+        let correct_boxes_array = [];
         let selected_boxes_array = [];
+        //filter clicked boxes into an array
         for(const num in inventory) {
             const filtered = inventory[num].filter(box => {
                 return box.clicked === true;
             });
             selected_boxes_array = selected_boxes_array.concat(filtered);
         }
-        console.log(selected_boxes_array);
+        // filter right answer boxes into an array
+        for(const num in inventory) {
+            const correct_boxes = inventory[num].filter(box => {
+                return box.number === numberAnswer && box.color === numberColorAnswer;
+            });
+            correct_boxes_array = correct_boxes_array.concat(correct_boxes);
+        }
+        console.log(selected_boxes_array, correct_boxes_array);
+        // filter checked boxes that are correct
         const check_array = selected_boxes_array.filter(box => {
+            return box.number === numberAnswer && box.color === numberColorAnswer;
+        });
+        // filter checked boxes that are wrong
+        const wrong_array = selected_boxes_array.filter(box => {
             return box.number !== numberAnswer || box.color !== numberColorAnswer;
         });
-        return check_array.length > 0 ? true : false;
+        // true is lost, false is win
+        return check_array.length !== correct_boxes_array.length ? true : wrong_array.length > 0 ? true : false;
     }
 
 
