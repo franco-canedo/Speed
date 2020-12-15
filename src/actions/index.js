@@ -9,7 +9,7 @@ export const addInventory = (boxObject) => ({
     payload: boxObject,
 })
 
-export const clearInventory = (boxObject) => ({
+export const clearInventory = () => ({
     type: 'CLEAR_INVENTORY',
 })
 
@@ -37,8 +37,3 @@ export const increaseScore = () => ({
     type: 'INCREASE_SCORE',
 })
     
-
-// export default {
-//     addInventory,
-//     addAnswer,
-// }
