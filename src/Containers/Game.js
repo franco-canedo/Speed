@@ -151,8 +151,9 @@ const Game = (props) => {
 
     // Logic to see if player lost. 
     const restart = () => {
-        setHasLost(check_if_win());
-        setHasWon(check_if_win());
+        let result = check_if_win();
+        setHasLost(result);
+        setHasWon(result);
         console.log('restart?');
     }
 
