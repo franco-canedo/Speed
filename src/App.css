@@ -51,6 +51,12 @@
   background: linear-gradient(to right, #39609e, #5876a6, #808c9e);
 }
 
+@media only screen and (max-width: 600px) {
+  .main {
+    height: 650px;
+  }
+}
+
 .playButton {
   animation: Slide_Up 2s ease;
   text-align: center;
@@ -68,13 +74,11 @@
 }
 
 .box {
-  
- 
   background: whitesmoke;
   margin-bottom: 10px;
   box-shadow: 5px 5px #20f1e0;
   text-align: center;
- border-radius: 10%;
+  border-radius: 10%;
   border-bottom: outset;
   border-right: outset;
   
@@ -123,8 +127,27 @@
     10px 0 10px #0ff;
 }
 
+@media only screen and (max-width: 600px) {
+  .box {
+    height: 50px !important;
+    box-shadow: 1px 1px #20f1e0;
+    margin-bottom: 5px;
+    width: 35px;
+  }
+
+  .boxClicked {
+    height: 50px !important;
+    margin-bottom: 5px;
+    width: 35px;
+  }
+}
+
 @media only screen and (max-height: 700px) {
   .box {
+    height: 60px;
+  }
+
+  .boxClicked {
     height: 60px;
   }
 }
@@ -132,6 +155,10 @@
 @media only screen and (max-height: 500px) {
   .box {
     height: 30px;
+  }
+
+  .boxClicked {
+    height: 60px;
   }
 }
 
@@ -157,6 +184,25 @@
   padding-left: 30px;
   
 }
+
+@media only screen and (max-width: 600px) {
+  .headerDivs {
+    width: 80%;
+  }
+}
+
+.numbers {
+  font-size: 27px;
+  font-family: "Times New Roman", Times, serif;
+}
+
+@media only screen and (max-width: 600px) {
+  .numbers {
+    font-size: 20px;
+  }
+}
+
+
 
 .game {
   /* border: dotted; */
