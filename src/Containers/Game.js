@@ -6,14 +6,13 @@ import RestartModal from '../Components/RestartModal';
 import ContinueModal from '../Components/ContinueModal';
 import { useSelector, useDispatch } from 'react-redux';
 import { addAnswer } from '../actions';
-import { answer } from '../actions'
+import { answer } from '../actions';
+import { increaseScore } from '../actions';
+import { clearInventory } from '../actions';
+import { propTypes } from 'react-bootstrap/esm/Image';
 
-import { connect } from 'react-redux';
 
-
-
-
-const Game = () => {
+const Game = (props) => {
 
     const [boxes, setState] = useState(['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']);
     const [colors, setColor] = useState([
@@ -34,10 +33,11 @@ const Game = () => {
     const dispatch = useDispatch();
     const answerObject = useSelector((state) => state.rightAnswer);
     const inventory = useSelector((state) => state.inventory);
+    const score = useSelector(state => state.score);
 
 
     useEffect(() => {
-        
+
         let i = Math.floor(Math.random() * colors.length);
         let n = boxes[Math.floor(Math.random() * boxes.length)]
         setAnswer(n);
@@ -84,7 +84,7 @@ const Game = () => {
         console.log(i);
         shuffle(boxes);
         return boxes.map(number => {
-           
+
             i = Math.floor(Math.random() * colors.length);
             switch (i) {
                 case 0:
@@ -100,14 +100,14 @@ const Game = () => {
                     color = 'yellow'
                     break;
             }
-            
+
             // console.log(number, numberAnswer);
             const boxObject = {
                 color: colors[i],
                 number: number
             }
 
-            if(number === numberAnswer && colors[i] === numberColorAnswer) {
+            if (number === numberAnswer && colors[i] === numberColorAnswer) {
                 dispatch(addAnswer(boxObject))
             }
 
@@ -160,14 +160,14 @@ const Game = () => {
         let correct_boxes_array = [];
         let selected_boxes_array = [];
         //filter clicked boxes into an array
-        for(const num in inventory) {
+        for (const num in inventory) {
             const filtered = inventory[num].filter(box => {
                 return box.clicked === true;
             });
             selected_boxes_array = selected_boxes_array.concat(filtered);
         }
         // filter right answer boxes into an array
-        for(const num in inventory) {
+        for (const num in inventory) {
             const correct_boxes = inventory[num].filter(box => {
                 return box.number === numberAnswer && box.color === numberColorAnswer;
             });
@@ -183,7 +183,21 @@ const Game = () => {
             return box.number !== numberAnswer || box.color !== numberColorAnswer;
         });
         // true is lost, false is win
-        return check_array.length !== correct_boxes_array.length ? true : wrong_array.length > 0 ? true : false;
+        if (check_array.length !== correct_boxes_array.length) {
+            return true;
+        } else if (wrong_array.length > 0) {
+            return true;
+        } else {
+            dispatch(increaseScore());
+            return false;
+        }
+        // return check_array.length !== correct_boxes_array.length ? true : wrong_array.length > 0 ? true : false;
+    }
+
+    const rerender_game = () => {
+        console.log('rerender?');
+        dispatch(clearInventory());
+        props.rerender();
     }
 
 
@@ -197,7 +211,7 @@ const Game = () => {
                     <Timer restart={restart} />
                 </div>
                 <div className='headerDivs'>
-                    <h1>Score: </h1>
+                    <h1>Score: {score}</h1>
                 </div>
             </div>
 
@@ -209,7 +223,7 @@ const Game = () => {
                 hasLost ? <RestartModal hasLost={hasLost} /> : null
             }
             {
-                hasWon ?  null : <ContinueModal hasWon={hasWon} />
+                hasWon ? null : <ContinueModal hasWon={hasWon} rerender={rerender_game}/>
             }
 
         </div>

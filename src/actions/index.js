@@ -9,6 +9,10 @@ export const addInventory = (boxObject) => ({
     payload: boxObject,
 })
 
+export const clearInventory = (boxObject) => ({
+    type: 'CLEAR_INVENTORY',
+})
+
 export const addAnswer = (boxObject) => ({
     type: 'ADD_ANSWER',
     payload: boxObject
@@ -27,6 +31,10 @@ export const selectAnswer = (data) => ({
 export const deselectAnswer = (data) => ({
     type: 'DESELECT_ANSWER',
     payload: data
+})
+
+export const increaseScore = () => ({
+    type: 'INCREASE_SCORE',
 })
     
 
