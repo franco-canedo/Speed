@@ -178,6 +178,14 @@ h1 {
   font-family: "Times New Roman", Times, serif;
 }
 
+.h1timer {
+  color:black;
+}
+
+.h1timerRed {
+  color: red;
+}
+
 /* ////////////////  header elements*/
 
 

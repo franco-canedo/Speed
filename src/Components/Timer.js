@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 const Timer = (props) => {
 
     const [timeLeft, setTimeLeft] = useState(10);
+    const [h1ClassName, setClassName] = useState('h1timer');
     const answerObject = useSelector((state) => state.rightAnswer);
 
     useEffect(() => {
@@ -13,7 +14,8 @@ const Timer = (props) => {
             return;
         }
         const timer = setInterval(() => {
-                setTimeLeft(timeLeft => timeLeft - 1)   
+                setTimeLeft(timeLeft => timeLeft - 1);
+                changeClassName();
         }, 1000)
 
         // returned function will be called on component unmount 
@@ -21,10 +23,14 @@ const Timer = (props) => {
             clearInterval(timer);
             
         }
-    }, [timeLeft])
+    }, [timeLeft, h1ClassName]);
+
+    const changeClassName = () => {
+        h1ClassName === 'h1timer' ? setClassName('h1timerRed') : setClassName('h1timer');
+    }
 
     return (
-        <h1>Time left: {timeLeft}</h1>
+        <h1 className={h1ClassName}>Time left: {timeLeft}</h1>
     )
 }
 

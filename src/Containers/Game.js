@@ -198,7 +198,6 @@ const Game = (props) => {
         console.log('rerender?');
         dispatch(clearInventory());
         props.rerender();
-        
     }
 
 
