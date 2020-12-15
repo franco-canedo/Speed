@@ -7,7 +7,8 @@ import ContinueModal from '../Components/ContinueModal';
 import { useSelector, useDispatch } from 'react-redux';
 import { addAnswer } from '../actions';
 import { answer } from '../actions';
-import { increaseScore } from '../actions'
+import { increaseScore } from '../actions';
+import { clearInventory } from '../actions';
 import { propTypes } from 'react-bootstrap/esm/Image';
 
 
@@ -195,7 +196,9 @@ const Game = (props) => {
 
     const rerender_game = () => {
         console.log('rerender?');
+        dispatch(clearInventory());
         props.rerender();
+        
     }
 
 

@@ -41,6 +41,20 @@ const inventory = (state = initialState, action) => {
             object3[action.payload.number][index2] = box2
 
             return object3;
+        case 'CLEAR_INVENTORY':
+            console.log('clear inventory');
+            return {
+                1: [],
+                2: [],
+                3: [],
+                4: [],
+                5: [],
+                6: [],
+                7: [],
+                8: [],
+                9: [],
+                10: [],
+            };
         default:
             return state;
     }
