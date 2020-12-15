@@ -11,7 +11,6 @@ import { increaseScore } from '../actions';
 import { clearInventory } from '../actions';
 import { propTypes } from 'react-bootstrap/esm/Image';
 
-
 const Game = (props) => {
 
     const [boxes, setState] = useState(['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']);
@@ -35,9 +34,7 @@ const Game = (props) => {
     const inventory = useSelector((state) => state.inventory);
     const score = useSelector(state => state.score);
 
-
     useEffect(() => {
-
         let i = Math.floor(Math.random() * colors.length);
         let n = boxes[Math.floor(Math.random() * boxes.length)]
         setAnswer(n);
@@ -151,8 +148,9 @@ const Game = (props) => {
 
     // Logic to see if player lost. 
     const restart = () => {
-        setHasLost(check_if_win());
-        setHasWon(check_if_win());
+        let result = check_if_win();
+        setHasLost(result);
+        setHasWon(result);
         console.log('restart?');
     }
 
@@ -223,7 +221,7 @@ const Game = (props) => {
                 hasLost ? <RestartModal hasLost={hasLost} /> : null
             }
             {
-                hasWon ? null : <ContinueModal hasWon={hasWon} rerender={rerender_game}/>
+                hasWon ? null : <ContinueModal hasWon={hasWon} rerender={rerender_game} />
             }
 
         </div>

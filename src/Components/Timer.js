@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 const Timer = (props) => {
 
-    const [timeLeft, setTimeLeft] = useState(10);
+    const [timeLeft, setTimeLeft] = useState(6);
     const [h1ClassName, setClassName] = useState('h1timer');
     const answerObject = useSelector((state) => state.rightAnswer);
 
