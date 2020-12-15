@@ -10,9 +10,15 @@ import Game from './Containers/Game';
 function App() {
 
   const [game, setState] = useState(false);
+  const [remountKey, setRemountKey] = useState((new Date()).getTime());
 
   const playGame = () => {
     setState(true);
+  }
+
+  const rerender = () => {
+    console.log('remount');
+    setRemountKey((new Date()).getTime());
   }
 
 
@@ -21,7 +27,7 @@ function App() {
     <React.Fragment>
 
       {
-        game ? <Game/> : <Main playGame={playGame}/>
+        game ? <Game key={remountKey} rerender={rerender}/> : <Main playGame={playGame}/>
       }
 
     </React.Fragment>

@@ -7,6 +7,7 @@ const ContinueModal = (props) => {
   
     const handleClose = () => {
         setShow(false);
+        props.rerender();
     };
     const handleShow = () => setShow(true);
 

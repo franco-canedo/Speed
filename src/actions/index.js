@@ -28,6 +28,10 @@ export const deselectAnswer = (data) => ({
     type: 'DESELECT_ANSWER',
     payload: data
 })
+
+export const increaseScore = () => ({
+    type: 'INCREASE_SCORE',
+})
     
 
 // export default {
